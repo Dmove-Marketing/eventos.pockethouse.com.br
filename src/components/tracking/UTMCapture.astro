@@ -1,0 +1,62 @@
+---
+// src/components/tracking/UTMCapture.astro
+// Captura UTMs, click IDs e referrer da URL e salva em sessionStorage
+// Dados são enviados junto com cada formulário para atribuição de campanhas
+---
+
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+
+    // UTM params padrão
+    const utmKeys = [
+      'utm_source', 'utm_medium', 'utm_campaign',
+      'utm_content', 'utm_term'
+    ];
+
+    // Click IDs (Google Ads, Meta, TikTok, Bing, etc.)
+    const clickIdKeys = ['gclid', 'fbclid', 'sck', 'ttclid', 'msclkid'];
+
+    const trackingData: Record<string, string> = {};
+
+    // Capturar UTMs
+    utmKeys.forEach(key => {
+      const value = params.get(key);
+      if (value) trackingData[key] = value;
+    });
+
+    // Capturar click IDs
+    clickIdKeys.forEach(key => {
+      const value = params.get(key);
+      if (value) trackingData[key] = value;
+    });
+
+    // Referrer (só externo)
+    if (document.referrer && !document.referrer.includes(window.location.hostname)) {
+      trackingData['referrer'] = document.referrer;
+    }
+
+    // Landing page
+    trackingData['landing_page'] = window.location.pathname;
+    trackingData['landing_url'] = window.location.href.split('?')[0];
+
+    // Timestamp da primeira visita na sessão
+    if (!sessionStorage.getItem('dmove_first_visit')) {
+      sessionStorage.setItem('dmove_first_visit', new Date().toISOString());
+    }
+
+    // Salvar em sessionStorage (só se tiver dados novos de UTM/click)
+    const hasNewParams = utmKeys.some(k => trackingData[k]) || clickIdKeys.some(k => trackingData[k]);
+    if (hasNewParams) {
+      sessionStorage.setItem('dmove_tracking', JSON.stringify(trackingData));
+    }
+
+    // Push para DataLayer
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: 'page_meta',
+      page_path: window.location.pathname,
+      ...trackingData
+    });
+  })();
+</script>

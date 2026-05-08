@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EspaçosSP — Solicitação de Orçamento</title>
+  <meta name="description"
+    content="Espaços para eventos corporativos em São Paulo. Villa Lobos, Alto de Pinheiros e Panamericana. Solicite seu orçamento.">
+  <meta property="og:title" content="EspaçosSP — Solicitação de Orçamento">
+  <meta property="og:description"
+    content="Estrutura, personalização e impacto real para o seu evento corporativo em São Paulo.">
+  <meta property="og:locale" content="pt_BR">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green: #378988;
+      --green-light: #e8f4f4;
+      --green-dark: #2a6f6e;
+      --white: #ffffff;
+      --gray-50: #f9f9f7;
+      --gray-100: #f2f2f0;
+      --gray-200: #e4e4e1;
+      --gray-400: #9e9e9a;
+      --gray-600: #5a5a56;
+      --gray-800: #2a2a28;
+      --font: 'Poppins', sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-md: 0 6px 30px rgba(0, 0, 0, 0.09);
+      --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--gray-50);
+      color: var(--gray-800);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── BACKGROUND IMAGE ── */
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url(./assets/images/hero);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Overlay sobre o background para legibilidade */
+    .bg-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0);
+      /* ← Ajuste a opacidade (0.0 = sem overlay, 1.0 = branco total) */
+    }
+
+    /* ── WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .logo-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* ← Troque por "cover" se quiser que a imagem preencha o quadrado */
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-800);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-name span {
+      color: var(--green);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .headline {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.6px;
+      color: var(--gray-800);
+      max-width: 340px;
+    }
+
+    .headline em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .subline {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    /* ── UNIT CHIPS ── */
+    .units {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .unit-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex: 1;
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .unit-chip svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--green);
+      flex-shrink: 0;
+    }
+
+    .unit-chip:hover {
+      border-color: var(--green);
+      color: var(--green-dark);
+      background: var(--green-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .form-top-bar {
+      height: 4px;
+      background: var(--green);
+    }
+
+    .form-body {
+      padding: 32px 28px 36px;
+    }
+
+    .form-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .form-subtitle {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--gray-800);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--gray-400);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(55, 137, 136, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.6;
+    }
+
+    /* select arrow */
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--gray-400);
+      pointer-events: none;
+    }
+
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 15px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(55, 137, 136, 0.35);
+      margin-top: 4px;
+      letter-spacing: 0.1px;
+    }
+
+    .btn-submit svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+      flex-shrink: 0;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(55, 137, 136, 0.4);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.85;
+      cursor: not-allowed;
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--gray-400);
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .form-note svg {
+      width: 11px;
+      height: 11px;
+      fill: var(--gray-400);
+      flex-shrink: 0;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      padding: 32px 28px 36px;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--green);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .success-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-800);
+      letter-spacing: -0.3px;
+    }
+
+    .success-text {
+      font-size: 13.5px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: fadeUp 0.6s ease 0.5s both;
+    }
+
+    .footer-copy {
+      font-size: 11.5px;
+      color: var(--gray-400);
+    }
+
+    .footer-link {
+      font-size: 11.5px;
+      color: var(--green);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── MOBILE TWEAKS ── */
+    @media (max-width: 420px) {
+      .page {
+        padding: 28px 16px 48px;
+        gap: 24px;
+      }
+
+      .form-body {
+        padding: 28px 20px 32px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .headline {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+     BACKGROUND: troque "BACKGROUND-AQUI.jpg"
+     pelo caminho ou URL da sua imagem de fundo
+     ═══════════════════════════════════════════ -->
+  <div class="bg-image"></div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-wrap">
+        <!-- ═══════════════════════════════════════════
+           LOGO: troque "LOGO-AQUI.png" pelo caminho
+           ou URL da sua imagem de logo
+           ═══════════════════════════════════════════ -->
+        <img src="LOGO-AQUI.png" alt="EspaçosSP">
+      </div>
+
+      <div class="brand-name">Espaços<span>SP</span></div>
+
+      <div class="badge">Eventos corporativos · São Paulo</div>
+
+      <h1 class="headline">Seu evento. Sua essência. <em>Seu Espaço.</em></h1>
+
+      <p class="subline">Estrutura completa, endereços privilegiados e personalização para transformar cada encontro em
+        uma experiência memorável.</p>
+    </div>
+
+    <!-- UNITS -->
+    <div class="units">
+      <span class="unit-chip">
+        <svg viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        Villa Lobos
+      </span>
+      <span class="unit-chip">
+        <svg viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        Alto de Pinheiros
+      </span>
+      <span class="unit-chip">
+        <svg viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        Panamericana
+      </span>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card">
+      <div class="form-top-bar"></div>
+
+      <!-- FORM -->
+      <div class="form-body" id="formWrap">
+        <h2 class="form-title">Solicite um orçamento</h2>
+        <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
+
+        <form id="bioForm" onsubmit="handleSubmit(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail corporativo</label>
+            <input type="email" id="email" placeholder="voce@empresa.com.br" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tipo">Tipo de evento</label>
+              <div class="select-wrap">
+                <select id="tipo" required>
+                  <option value="">Selecione</option>
+                  <option>Conferência / Palestra</option>
+                  <option>Workshop / Treinamento</option>
+                  <option>Confraternização corporativa</option>
+                  <option>Offsite corporativo</option>
+                  <option>Reunião de Networking</option>
+                  <option>Lançamento de produto</option>
+                  <option>Happy Hour</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="data">Data do evento</label>
+              <input type="date" id="data" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="convidados">Nº de pessoas</label>
+              <input type="number" id="convidados" placeholder="Ex: 80" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="unidade">Unidade</label>
+              <div class="select-wrap">
+                <select id="unidade">
+                  <option value="">Selecione</option>
+                  <option>Villa Lobos</option>
+                  <option>Alto de Pinheiros</option>
+                  <option>Panamericana</option>
+                  <option>Ainda não sei</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem (opcional)</label>
+            <textarea id="mensagem" placeholder="Conte mais sobre o seu evento…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Enviar solicitação
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </form>
+
+        <p class="form-note">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Seus dados estão protegidos. Sem spam.
+        </p>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <div class="success-title">Solicitação recebida!</div>
+        <p class="success-text">Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou
+          e-mail.</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-copy">© 2025 EspaçosSP · Todos os direitos reservados</span>
+      <a href="mailto:contato@espacosp.com.br" class="footer-link">contato@espacosp.com.br</a>
+    </div>
+
+  </div>
+
+  <script>
+    // WhatsApp mask
+    document.getElementById('whatsapp').addEventListener('input', function (e) {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      e.target.value = v;
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      // Simulate send
+      setTimeout(() => {
+        document.getElementById('formWrap').style.display = 'none';
+        const sm = document.getElementById('successMsg');
+        sm.style.display = 'flex';
+      }, 1200);
+    }
+  </script>
+
+</body>
+
+</html>

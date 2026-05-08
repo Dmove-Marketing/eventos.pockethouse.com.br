@@ -1,0 +1,474 @@
+---
+// Gerado a partir de: eventos-corporativos.html
+import Base from '../layouts/Base.astro';
+import config from '../../config.json';
+import Img from '../components/ui/Img.astro';
+import { getImage } from 'astro:assets';
+import heroRaw from '../assets/images/hero.pocket_resultado.webp';
+import '../styles/eventos-corporativos.css';
+
+const bgHero = await getImage({ src: heroRaw });
+---
+
+<Base
+  title="Espaços para Eventos Corporativos · São Paulo"
+  ogImage="/pocket.house-ogImages.png"
+>
+  <link slot="head" rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" />
+<!-- NAVBAR -->
+    <nav>
+        <a href="#" class="logo">
+            <Img src="logo.pocket.png" alt="Pocket House" height={44} width={160} priority class="nav-logo-img" />
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#unidades">Nossas Unidades</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#formulario" class="nav-cta">Solicitar orçamento</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="formulario" style={`background-image: url(${bgHero.src}); background-size: cover; background-position: center;`}>
+        <div class="hero-overlay"></div>
+        <div class="hero-left">
+            <div class="hero-badge">Eventos corporativos · São Paulo</div>
+
+            <h1>Eventos corporativos com estrutura, personalização e <em>impacto real.</em></h1>
+
+            <p class="hero-desc">Conheça nossos espaços, localizados em endereços privilegiados de São Paulo, projetados
+                para transformar cada evento em uma experiência memorável.</p>
+
+
+        </div>
+
+        <div class="hero-right">
+            <div class="form-card">
+                <div id="ecFormBody">
+                    <h3 class="form-title">Solicite um orçamento</h3>
+                    <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
+
+                    <form
+                      id="form-lead-form"
+                      name="lead-form"
+                      data-form-id="lead-form"
+                      data-project={config.project_slug}
+                      data-submit-url={config.forms['lead-form'].webhooks[0]}
+                      data-redirect={config.forms['lead-form'].redirect_on_success}
+                      data-grid-id="ecFormBody"
+                      data-success-id="ecSuccess"
+                      novalidate
+                    >
+                      <div style="display:none" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="nome">Nome</label>
+                          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="telefone">WhatsApp</label>
+                          <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="email">E-mail corporativo</label>
+                        <input type="email" id="email" name="email" placeholder="voce@empresa.com.br" required>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="tipo">Tipo de evento</label>
+                          <select id="tipo" name="tipo" required>
+                            <option value="">Selecione</option>
+                            <option>Conferência / Palestra</option>
+                            <option>Workshop / Treinamento</option>
+                            <option>Confraternização corporativa</option>
+                            <option>Offsite corporativo</option>
+                            <option>Reunião de Networking</option>
+                            <option>Lançamento de produto</option>
+                            <option>Happy Hour</option>
+                            <option>Outro</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="data">Data do evento</label>
+                          <input type="text" id="data" name="data" placeholder="Data do evento" required readonly>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="convidados">Nº de pessoas</label>
+                          <input type="number" id="convidados" name="convidados" placeholder="Ex: 80" min="1" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="unidade">Unidade</label>
+                          <select id="unidade" name="unidade">
+                            <option value="">Selecione</option>
+                            <option>Villa Lobos</option>
+                            <option>Alto de Pinheiros</option>
+                            <option>Panamericana</option>
+                            <option>Ainda não sei</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="mensagem">Mensagem (opcional)</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Conte mais sobre o seu evento…"></textarea>
+                      </div>
+
+                      <input type="hidden" name="fonte" value="Landing page/eventos-corporativos">
+
+                      <button type="submit" class="btn btn-primary" id="lead-formSubmitBtn">
+                        <span class="btn-text">Solicitar orçamento</span>
+                        <span class="btn-loading" style="display:none">Enviando...</span>
+                        <svg viewBox="0 0 24 24">
+                          <path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        </svg>
+                      </button>
+                    </form>
+
+                    <p class="form-note">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Seus dados estão protegidos. Sem spam.
+                    </p>
+                </div>
+
+                <div id="ecSuccess" class="ec-success">
+                    <div class="ec-success-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="ec-success-title">Solicitação recebida!</div>
+                    <p class="ec-success-text">Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- UNIDADES -->
+    <section class="units-section" id="unidades">
+        <div class="section-header">
+            <span class="section-tag">Nossas unidades</span>
+            <h2>Encontre o espaço ideal<br><span class="text-green">para o seu evento</span></h2>
+            <p class="section-lead">Três unidades exclusivas em São Paulo, cada uma projetada para receber eventos
+                corporativos com sofisticação e estrutura completa.</p>
+        </div>
+
+        <div class="units-grid">
+            <!-- Card 1 -->
+            <div class="unit-card">
+                <Img src="Villa-lobos.pocket_resultado.webp" alt="Villa Lobos" class="unit-image" />
+                <div class="unit-body">
+                    <h3 class="unit-name">Villa Lobos</h3>
+                    <span class="unit-capacity">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Até 230 pessoas
+                    </span>
+                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="unit-card">
+                <Img src="Alto-pinheiros.pocket_resultado.webp" alt="Alto de Pinheiros" class="unit-image" />
+                <div class="unit-body">
+                    <h3 class="unit-name">Alto de Pinheiros</h3>
+                    <span class="unit-capacity">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Até 80 pessoas
+                    </span>
+                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="unit-card">
+                <Img src="Panamericana.pocket_resultado.webp" alt="Panamericana" class="unit-image" />
+                <div class="unit-body">
+                    <h3 class="unit-name">Panamericana</h3>
+                    <span class="unit-capacity">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        Até 160 pessoas
+                    </span>
+                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="gallery-section" id="galeria">
+        <div class="section-header">
+            <span class="section-tag">Galeria</span>
+            <h2>Conheça nossos espaços</h2>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item g1"><Img src="galeria01.pocket_resultado.webp" alt="Galeria 1" /></div>
+            <div class="gallery-item g2"><Img src="galeria02.pocket_resultado.webp" alt="Galeria 2" /></div>
+            <div class="gallery-item g3"><Img src="galeria03.pocket_resultado.webp" alt="Galeria 3" /></div>
+            <div class="gallery-item g4"><Img src="galeria04.pocket_resultado.webp" alt="Galeria 4" /></div>
+            <div class="gallery-item g5"><Img src="galeria05.pocket_resultado.webp" alt="Galeria 5" /></div>
+            <div class="gallery-item g6"><Img src="galeria06.pocket_resultado.webp" alt="Galeria 6" /></div>
+        </div>
+
+        <div class="gallery-cta">
+            <button class="btn btn-primary btn-lg" onclick="scrollToForm()">
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24"
+                    style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="section-header">
+            <span class="section-tag">Prova social</span>
+            <h2>O que nossos clientes dizem</h2>
+        </div>
+
+        <div class="testimonials-grid">
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Excelente lugar onde tive uma experiência corporativa única!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AG</div>
+                    <span class="testimonial-name">André Guaraldo</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Um ótimo lugar com uma ótima equipe de profissionais para realizar eventos
+                    de qualidade.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">GM</div>
+                    <span class="testimonial-name">Gregori Murakami</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Evento do Google para o setor financeiro que ocorreu nesse espaço, foi
+                    genial!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JB</div>
+                    <span class="testimonial-name">João Bosco</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Lugar muito bonito e agradável para fazer e participar de eventos. Nota 10.
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">EW</div>
+                    <span class="testimonial-name">Evandro Welupek</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card" style="grid-column: 2 / 3;">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Local super agradável e magnífico para eventos de negócios. A área verde
+                    intimista convida ao networking.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RD</div>
+                    <span class="testimonial-name">Renato Douglas</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <p class="testimonial-text">Uma casa de eventos bem confortável, com ar-condicionado até na área
+                    exterior que era coberta, gostei muito desse lugar!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AS</div>
+                    <span class="testimonial-name">Andy Sennin</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="gallery-cta">
+            <button class="btn btn-primary btn-lg" onclick="scrollToForm()">
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24"
+                    style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="site-footer-left">
+            <span class="site-footer-copy">© 2026 Pocket House · Todos os direitos reservados</span>
+            <a href="mailto:contato@espacosp.com.br" class="site-footer-link">contato@espacosp.com.br</a>
+        </div>
+        <div class="site-footer-right">
+            <span class="site-footer-dev">Desenvolvido por:</span>
+            <a href="https://dmove.com.br/" target="_blank" rel="noopener noreferrer">
+                <img src="https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2024/01/Logotipo.png.webp" alt="Dmove" class="site-footer-logo" />
+            </a>
+        </div>
+    </footer>
+
+    
+</Base>
+<script>
+  import '../scripts/forms.ts';
+  import '../scripts/eventos-corporativos.js';
+</script>
