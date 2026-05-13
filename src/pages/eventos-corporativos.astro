@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import config from '../../config.json';
 import LeadForm from '../components/forms/LeadForm.astro';
+import Img from '../components/ui/Img.astro';
 import '../styles/eventos-corporativos.css';
 ---
 
@@ -422,19 +423,16 @@ import '../styles/eventos-corporativos.css';
     <!-- FOOTER -->
     <footer id="contato">
         <div class="footer-logo">
-            <div class="footer-logo-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" fill="white" />
-                </svg>
-            </div>
-            <span class="footer-brand">EspaçosSP</span>
+            <Img src="logo.pocket.png" alt="Pocket House" height={36} width={130} class="footer-logo-img" />
         </div>
 
-        <div class="footer-copy">© 2025 EspaçosSP · Todos os direitos reservados</div>
+        <div class="footer-copy">© 2026 Pocket House · Todos os direitos reservados</div>
 
-        <div class="footer-contact">
-            <a href="mailto:contato@espacosp.com.br">contato@espacosp.com.br</a><br>
-            <a href="tel:+551140020000">(11) 4002-0000</a>
+        <div class="footer-dmove">
+            <span>Desenvolvido por</span>
+            <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer">
+                <img src="https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2024/01/Logotipo-2048x858.png.webp" alt="Dmove Marketing" class="footer-dmove-logo" />
+            </a>
         </div>
     </footer>
 

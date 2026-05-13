@@ -423,20 +423,41 @@
       animation: fadeUp 0.6s ease 0.5s both;
     }
 
+    .footer-pocket-logo {
+      height: 36px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
     .footer-copy {
       font-size: 11.5px;
       color: var(--gray-400);
     }
 
-    .footer-link {
+    .footer-dmove {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11.5px;
-      color: var(--green);
-      text-decoration: none;
+      color: var(--gray-400);
+    }
+
+    .footer-dmove a {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-dmove-logo {
+      height: 42px;
+      width: auto;
+      display: block;
+      object-fit: contain;
       transition: opacity 0.2s;
     }
 
-    .footer-link:hover {
-      opacity: 0.7;
+    .footer-dmove a:hover .footer-dmove-logo {
+      opacity: 0.8;
     }
 
     /* ── ANIMATIONS ── */

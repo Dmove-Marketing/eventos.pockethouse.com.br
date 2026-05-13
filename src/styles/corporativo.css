@@ -1302,17 +1302,15 @@ footer {
 }
 
 .footer-dmove-logo {
-  height: 22px;
+  height: 42px;
   width: auto;
   display: block;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.6;
   transition: opacity 0.2s;
 }
 
 .footer-dmove a:hover .footer-dmove-logo {
-  opacity: 1;
+  opacity: 0.85;
 }
 
 /* ── FADE-UP ── */
