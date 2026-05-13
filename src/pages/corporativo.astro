@@ -467,9 +467,16 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Pocket<span>House</span></div>
+  <div class="footer-logo">
+    <Img src="logo.pocket.png" alt="Pocket House" height={36} width={130} class="footer-logo-img" />
+  </div>
   <div class="footer-text">© 2026 Pocket House · Todos os direitos reservados</div>
-  <div class="footer-text">Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer">Dmove Marketing</a></div>
+  <div class="footer-dmove">
+    <span>Desenvolvido por</span>
+    <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer">
+      <img src="https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2024/01/Logotipo-2048x858.png.webp" alt="Dmove Marketing" class="footer-dmove-logo" />
+    </a>
+  </div>
 </footer>
 
 

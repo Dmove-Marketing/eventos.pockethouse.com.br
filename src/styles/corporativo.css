@@ -1272,24 +1272,48 @@ footer {
 }
 
 .footer-logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
+  display: flex;
+  align-items: center;
 }
 
-.footer-logo span { color: var(--green); }
+.footer-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
 
 .footer-text {
   font-size: 13px;
   color: rgba(255,255,255,0.5);
 }
 
-.footer-text a {
-  color: var(--green);
-  text-decoration: none;
+.footer-dmove {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
 }
 
-.footer-text a:hover { opacity: 0.8; }
+.footer-dmove a {
+  display: flex;
+  align-items: center;
+}
+
+.footer-dmove-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.footer-dmove a:hover .footer-dmove-logo {
+  opacity: 1;
+}
 
 /* ── FADE-UP ── */
 .fade-up {
