@@ -1,14 +1,22 @@
 /* Scripts extraídos de eventos-corporativos.html */
 
 function scrollToForm() {
-  document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => document.getElementById('nome').focus(), 600);
-}
+            document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('nome').focus(), 600);
+        }
 
-document.querySelectorAll('[onclick="scrollToForm()"]').forEach(el => {
-  el.removeAttribute('onclick');
-  el.addEventListener('click', scrollToForm);
-});
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.textContent = '✓ Solicitação enviada!';
+            btn.style.background = '#2a6f6e';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = 'Solicitar orçamento <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3000);
+        }
 
         // Intersection Observer para animações ao scroll
         const observer = new IntersectionObserver((entries) => {
@@ -19,19 +27,6 @@ document.querySelectorAll('[onclick="scrollToForm()"]').forEach(el => {
                 }
             });
         }, { threshold: 0.1 });
-
-// Flatpickr — seletor de data
-const fpScript = document.createElement('script');
-fpScript.src = 'https://npmcdn.com/flatpickr/dist/flatpickr.min.js';
-fpScript.onload = () => {
-  flatpickr('#data', {
-    locale: 'pt',
-    dateFormat: 'd/m/Y',
-    minDate: 'today',
-    disableMobile: true,
-  });
-};
-document.head.appendChild(fpScript);
 
         document.querySelectorAll('.unit-card, .gallery-item, .testimonial-card').forEach(el => {
             el.style.opacity = '0';

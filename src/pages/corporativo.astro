@@ -1,0 +1,479 @@
+---
+// Gerado a partir de: corporativo.html
+import Base from '../layouts/Base.astro';
+import config from '../../config.json';
+import Img from '../components/ui/Img.astro';
+import LeadForm from '../components/forms/LeadForm.astro';
+import { getImage } from 'astro:assets';
+import heroRaw from '../assets/images/hero.pocket_resultado.webp';
+import '../styles/corporativo.css';
+
+const bgHero = await getImage({ src: heroRaw });
+
+const galeriaGlob = import.meta.glob<string>('../assets/images/galeria-corporativa*_resultado.webp', { eager: true, query: '?url', import: 'default' });
+const galeriaImages = Object.entries(galeriaGlob).sort(([a], [b]) => a.localeCompare(b)).map(([, src]) => src);
+
+const oneGlob = import.meta.glob<string>('../assets/images/carrossel.one*_resultado.webp', { eager: true, query: '?url', import: 'default' });
+const duoGlob = import.meta.glob<string>('../assets/images/carrossel.duo*_resultado.webp', { eager: true, query: '?url', import: 'default' });
+
+const oneImages = Object.entries(oneGlob).sort(([a], [b]) => a.localeCompare(b)).map(([, src]) => src);
+const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b)).map(([, src]) => src);
+---
+
+<Base
+  title="Eventos Corporativos · Pocket House · São Paulo"
+  description="Espaços para eventos corporativos em São Paulo com estrutura completa e personalização. Solicite orçamento."
+  ogImage="/pocket.house-ogImages.png"
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">
+    <Img src="logo.pocket.png" alt="Pocket House" height={44} width={160} priority class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#unidades">Unidades</a></li>
+    <li><a href="#eventos-tipos">Eventos</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Solicite orçamento</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style={`background-image: url(${bgHero.src}); background-size: cover; background-position: center;`}>
+  <div class="hero-left fade-up">
+    <div class="hero-tag">Eventos Corporativos · São Paulo</div>
+    <h1>Eventos corporativos com estrutura, personalização e <em>impacto real.</em></h1>
+    <p>Conheça nossos espaços, localizados em endereços privilegiados de São Paulo, projetados para transformar cada evento em uma experiência memorável.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">Solicite orçamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span>+</span>2.000</div>
+      <div class="stat-desc">eventos realizados</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span>+</span>680 mil</div>
+      <div class="stat-desc">pessoas impactadas</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span>+</span>15.000</div>
+      <div class="stat-desc">horas de experiências criadas</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-img fade-up">
+        <div class="sobre-img-main">
+          <Img src="galeria01.pocket_resultado.webp" alt="Pocket House interior" />
+        </div>
+      </div>
+      <div class="sobre-texto fade-up">
+        <div class="section-tag">Sobre nós</div>
+        <h2 class="section-title">Mais do que espaço, uma curadoria de <em>experiência</em></h2>
+        <div class="divider"></div>
+        <p>Desde 2018, a Pocket House redefine o conceito de eventos corporativos.</p>
+        <p>Mais do que espaços prontos, oferecemos uma base versátil que funciona como ponto de partida para diferentes formatos, propostas e experiências.</p>
+        <p>Em três endereços exclusivos no coração de São Paulo, unimos arquitetura, natureza e funcionalidade para criar ambientes que se adaptam ao seu evento.</p>
+        <a href="#contato" class="btn-primary" style="margin-top:1.5rem;display:inline-flex">Solicite orçamento</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPAÇOS -->
+<section id="unidades" class="espacos">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">Nossas unidades</div>
+      <h2 class="section-title">Três casas, diferentes possibilidades,<br><em>a mesma excelência</em></h2>
+      <p class="section-lead">Cada casa é pensada para se adaptar a diferentes propostas. Do layout à atmosfera. Você não escolhe um formato pronto, você constrói o seu.</p>
+    </div>
+    <div class="espacos-grid">
+
+      <div class="espaco-card fade-up">
+        <div class="espaco-img">
+          <div class="carrossel" id="carrossel-vl">
+            <div class="carrossel-track">
+              <Img src="carrossel.Villa-Lobos_01.webp" alt="Villa-Lobos 1" />
+              <Img src="carrossel.Villa-Lobos_02.webp" alt="Villa-Lobos 2" />
+              <Img src="carrossel.Villa-Lobos_03.webp" alt="Villa-Lobos 3" />
+              <Img src="carrossel.Villa-Lobos_04.webp" alt="Villa-Lobos 4" />
+              <Img src="carrossel.Villa-Lobos_05.webp" alt="Villa-Lobos 5" />
+              <Img src="carrossel.Villa-Lobos_06.webp" alt="Villa-Lobos 6" />
+              <Img src="carrossel.Villa-Lobos_07.webp" alt="Villa-Lobos 7" />
+              <Img src="carrossel.Villa-Lobos_08.webp" alt="Villa-Lobos 8" />
+            </div>
+          </div>
+          <div class="espaco-badge">Villa-Lobos</div>
+        </div>
+        <div class="espaco-body">
+          <div class="espaco-name">Villa-Lobos</div>
+          <div class="espaco-cap">até 200 convidados</div>
+          <p class="espaco-desc">Um espaço amplo e versátil, com áreas internas e externas permitindo desde plenárias até experiências mais dinâmicas. Perfeito para eventos de maior porte.</p>
+          <a href="#contato" class="espaco-cta">Solicite orçamento</a>
+        </div>
+      </div>
+
+      <div class="espaco-card fade-up">
+        <div class="espaco-img">
+          <div class="carrossel" id="carrossel-ap">
+            <div class="carrossel-track">
+              <Img src="carrossel.Pinheiros_01.webp" alt="Alto de Pinheiros 1" />
+              <Img src="carrossel.Pinheiros_02.webp" alt="Alto de Pinheiros 2" />
+              <Img src="carrossel.Pinheiros_03.webp" alt="Alto de Pinheiros 3" />
+              <Img src="carrossel.Pinheiros_04.webp" alt="Alto de Pinheiros 4" />
+              <Img src="carrossel.Pinheiros_05.webp" alt="Alto de Pinheiros 5" />
+              <Img src="carrossel.Pinheiros_06.webp" alt="Alto de Pinheiros 6" />
+              <Img src="carrossel.Pinheiros_07.webp" alt="Alto de Pinheiros 7" />
+              <Img src="carrossel.Pinheiros_08.webp" alt="Alto de Pinheiros 8" />
+              <Img src="carrossel.Pinheiros_09.webp" alt="Alto de Pinheiros 9" />
+              <Img src="carrossel.Pinheiros_10.webp" alt="Alto de Pinheiros 10" />
+            </div>
+          </div>
+          <div class="espaco-badge">Alto de Pinheiros</div>
+        </div>
+        <div class="espaco-body">
+          <div class="espaco-name">Alto de Pinheiros</div>
+          <div class="espaco-cap">até 80 convidados</div>
+          <p class="espaco-desc">Um ambiente mais intimista, ideal para encontros que pedem personalização no formato, na condução e na experiência. Equilíbrio entre conforto e estética.</p>
+          <a href="#contato" class="espaco-cta">Solicite orçamento</a>
+        </div>
+      </div>
+
+      <div class="espaco-card fade-up">
+        <div class="espaco-img">
+          <div class="carrossel" id="carrossel-pan">
+            <div class="carrossel-track">
+              <Img src="carrossel.Panamericas_01.webp" alt="Panamericana 1" />
+              <Img src="carrossel.Panamericas_02.webp" alt="Panamericana 2" />
+              <Img src="carrossel.Panamericas_03.webp" alt="Panamericana 3" />
+              <Img src="carrossel.Panamericas_04.webp" alt="Panamericana 4" />
+              <Img src="carrossel.Panamericas_05.webp" alt="Panamericana 5" />
+              <Img src="carrossel.Panamericas_06.webp" alt="Panamericana 6" />
+              <Img src="carrossel.Panamericas_07.webp" alt="Panamericana 7" />
+            </div>
+          </div>
+          <div class="espaco-badge">Panamericana</div>
+        </div>
+        <div class="espaco-body">
+          <div class="espaco-name">Panamericana</div>
+          <div class="espaco-cap">até 130 convidados</div>
+          <p class="espaco-desc">Versatilidade e fluidez em um espaço que se transforma com facilidade, acompanhando diferentes ideias e objetivos. Para marcas que buscam flexibilidade.</p>
+          <a href="#contato" class="espaco-cta">Solicite orçamento</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIPOS DE EVENTOS -->
+<section id="eventos-tipos">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">O que realizamos</div>
+      <h2 class="section-title">Um espaço que acompanha<br><em>o seu objetivo</em></h2>
+      <p class="section-lead">De encontros estratégicos a grandes ativações, nossos espaços e operação se adaptam a diferentes formatos. Sempre com a mesma qualidade de entrega.</p>
+    </div>
+    <div class="eventos-grid fade-up">
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="evento-name">Offsites e imersões</div>
+        <div class="evento-desc">Ambientes ideais para planejamento, troca e construção estratégica.</div>
+      </div>
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="evento-name">Workshops e treinamentos</div>
+        <div class="evento-desc">Estrutura preparada para conteúdo, interação e produtividade.</div>
+      </div>
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="evento-name">Palestras e convenções</div>
+        <div class="evento-desc">Espaços versáteis para apresentações, talks e encontros corporativos.</div>
+      </div>
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="evento-name">Ativações de marca</div>
+        <div class="evento-desc">Cenários personalizáveis para experiências criativas e memoráveis.</div>
+      </div>
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="evento-name">Eventos de relacionamento</div>
+        <div class="evento-desc">Momentos pensados para conexão entre equipes, clientes e parceiros.</div>
+      </div>
+      <div class="evento-item">
+        <div class="evento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="evento-name">Happy hours corporativos</div>
+        <div class="evento-desc">Uma extensão mais leve e descontraída do seu evento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais" class="diferenciais">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">Estrutura completa</div>
+      <h2 class="section-title">Tudo o que seu evento precisa.<br><em>Com liberdade para personalizar cada detalhe</em></h2>
+      <p class="section-lead">Uma operação completa para garantir fluidez, qualidade e praticidade em cada etapa.</p>
+    </div>
+    <div class="dif-grid fade-up">
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><path d="M2 11l.45 2.24A2 2 0 0 0 4.41 15H5a2 2 0 0 0 2-2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2 2 2 0 0 0 2 2h.59a2 2 0 0 0 1.96-1.76L22 11z"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>
+        </div>
+        <div class="dif-text"><strong>Mobiliário</strong><span>Seleção sofisticada para cada layout</span></div>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </div>
+        <div class="dif-text"><strong>Gastronomia (A&amp;B)</strong><span>Curadoria gastronômica completa</span></div>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+        </div>
+        <div class="dif-text"><strong>Bar de drinks</strong><span>Mixologia para todos os formatos</span></div>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="dif-text"><strong>Som e iluminação</strong><span>Técnica que potencializa a experiência</span></div>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="dif-text"><strong>Cenografia e criação</strong><span>Ambientes que comunicam sua marca</span></div>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="dif-text"><strong>Conceito Smart</strong><span>Tecnologia integrada ao evento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">Depoimentos</div>
+      <h2 class="section-title">A experiência de quem<br><em>já esteve aqui</em></h2>
+      <p class="section-lead">Veja como marcas e empresas transformaram seus eventos com a estrutura e a proposta da Pocket House.</p>
+    </div>
+    <div class="dep-grid fade-up">
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Excelente lugar onde tive uma experiência corporativa única! O espaço é sofisticado e a equipe extremamente atenciosa.</p>
+        <div class="dep-author">
+          <div class="dep-avatar">AG</div>
+          <div><div class="dep-name">André Guaraldo</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Um ótimo lugar com uma ótima equipe de profissionais para realizar eventos de qualidade. Superou todas as expectativas.</p>
+        <div class="dep-author">
+          <div class="dep-avatar">GM</div>
+          <div><div class="dep-name">Gregori Murakami</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Evento do Google para o setor financeiro que ocorreu nesse espaço foi genial! Estrutura impecável e localização privilegiada.</p>
+        <div class="dep-author">
+          <div class="dep-avatar">JB</div>
+          <div><div class="dep-name">João Bosco</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Lugar muito bonito e agradável para fazer e participar de eventos. A atenção ao detalhe faz toda a diferença. Nota 10.</p>
+        <div class="dep-author">
+          <div class="dep-avatar">EW</div>
+          <div><div class="dep-name">Evandro Welupek</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Local super agradável e magnífico para eventos de negócios. A área verde intimista convida ao networking e às conexões genuínas.</p>
+        <div class="dep-author">
+          <div class="dep-avatar">RD</div>
+          <div><div class="dep-name">Renato Douglas</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+      <div class="dep-card">
+        <div class="dep-stars">★★★★★</div>
+        <p class="dep-text">Uma casa de eventos muito confortável, com ar-condicionado até na área exterior coberta. Gostei muito desse lugar!</p>
+        <div class="dep-author">
+          <div class="dep-avatar">AS</div>
+          <div><div class="dep-name">Andy Sennin</div><div class="dep-role">Cliente verificado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCEIROS -->
+<section class="parceiros">
+  <div class="container fade-up">
+    <div class="section-tag">Parceiros</div>
+    <h2 class="section-title">A Pocket House é a escolha de grandes marcas que<br><em>valorizam experiência, agilidade e consistência.</em></h2>
+  </div>
+  <div class="parceiros-tickers">
+    <div class="parceiros-ticker parceiros-ticker--right">
+      <div class="parceiros-ticker-track">
+        {[...oneImages, ...oneImages].map((src) => (
+          <div class="parceiro-item">
+            <img src={src} alt="" class="parceiro-logo-img" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="parceiros-ticker parceiros-ticker--left">
+      <div class="parceiros-ticker-track">
+        {[...duoImages, ...duoImages].map((src) => (
+          <div class="parceiro-item">
+            <img src={src} alt="" class="parceiro-logo-img" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" class="galeria">
+  <div class="galeria-container">
+    <div class="galeria-header fade-up">
+      <div class="section-tag">Galeria</div>
+      <h2 class="section-title">Onde conceitos viram<br><em>experiências reais</em></h2>
+    </div>
+    <div class="galeria-grid fade-up">
+      {galeriaImages.map((src, i) => (
+        <div class="galeria-item">
+          <img src={src} alt={`Galeria ${i + 1}`} loading="eager" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="contato">
+  <div class="container">
+    <div class="contato-wrap">
+      <div class="contato-info fade-up">
+        <div class="section-tag">Contato</div>
+        <h2 class="section-title">Vamos dar forma<br>ao seu próximo<br><em>evento corporativo?</em></h2>
+        <p>Preencha seus dados e receba um orçamento personalizado para sua empresa. Nossa equipe retorna em até 24 horas.</p>
+        <div class="contato-detail">
+          <div class="contato-item">
+            <div class="contato-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span>Villa-Lobos · Alto de Pinheiros · Panamericana — São Paulo, SP</span>
+          </div>
+          <div class="contato-item">
+            <div class="contato-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.65a16 16 0 0 0 6 6l1.27-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+            </div>
+            <span>Atendimento via WhatsApp e e-mail</span>
+          </div>
+          <div class="contato-item">
+            <div class="contato-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <span>Resposta em até 24 horas úteis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card fade-up">
+        <h3 class="form-title">Solicite um orçamento</h3>
+        <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
+
+        <LeadForm
+          formId="lead-form"
+          prefix="corp"
+          project={config.project_slug}
+          submitUrl={config.forms['lead-form'].webhooks[0]}
+          redirectUrl={config.forms['lead-form'].redirect_on_success}
+          submitText="Solicitar Orçamento"
+          honeypot
+          successTitle="Solicitação recebida!"
+          successText="Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail."
+          fields={[
+            { type: 'row', fields: [
+              { name: 'nome',     type: 'text', label: 'Nome',     placeholder: 'Seu nome completo',  required: true },
+              { name: 'telefone', type: 'tel',  label: 'Telefone', placeholder: '(11) 90000-0000',    required: true },
+            ]},
+            { name: 'email',   type: 'email', label: 'E-mail',  placeholder: 'seu@email.com', required: true, full: true },
+            { name: 'empresa', type: 'text',  label: 'Empresa', placeholder: 'Nome da empresa', full: true },
+            { type: 'row', fields: [
+              { name: 'data_evento', type: 'text',   label: 'Data do evento',    placeholder: 'DD/MM/AAAA' },
+              { name: 'horario',     type: 'text',   label: 'Horário',           placeholder: '00:00' },
+            ]},
+            { type: 'row', fields: [
+              { name: 'convidados', type: 'number', label: 'Nº de convidados', placeholder: 'Ex: 80', min: '1' },
+              { name: 'unidade',    type: 'select', label: 'Unidade', options: [
+                { value: '',                  label: 'Selecione',         disabled: true, selected: true },
+                { value: 'Villa-Lobos',       label: 'Villa-Lobos' },
+                { value: 'Alto de Pinheiros', label: 'Alto de Pinheiros' },
+                { value: 'Panamericana',      label: 'Panamericana' },
+                { value: 'Ainda não sei',     label: 'Ainda não sei' },
+              ]},
+            ]},
+            { name: 'fonte', type: 'hidden', value: 'Landing page/corporativo' },
+          ]}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pocket<span>House</span></div>
+  <div class="footer-text">© 2026 Pocket House · Todos os direitos reservados</div>
+  <div class="footer-text">Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer">Dmove Marketing</a></div>
+</footer>
+
+
+</Base>
+<script>
+  import '../scripts/corporativo.js';
+</script>

@@ -74,14 +74,32 @@ export function initForms() {
       const data: Record<string, string> = {};
       formData.forEach((v, k) => { if (k !== 'website') data[k] = v.toString(); });
 
+      // Capitalize first letter of each word in text/textarea fields
+      const skipCap = new Set(['data', 'data_evento', 'horario', 'hora', 'fonte', 'email']);
+      Object.keys(data).forEach(key => {
+        if (skipCap.has(key) || !data[key]) return;
+        const el = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${key}"]`);
+        if (!el) return;
+        const type = el.tagName.toLowerCase() === 'textarea' ? 'textarea' : (el as HTMLInputElement).type;
+        if (type === 'text' || type === 'textarea') {
+          data[key] = data[key].replace(/(?:^|\s)\S/g, c => c.toUpperCase());
+        }
+      });
+
       const trackingRaw = sessionStorage.getItem('dmove_tracking');
       const tracking    = trackingRaw ? JSON.parse(trackingRaw) : {};
       const firstVisit  = sessionStorage.getItem('dmove_first_visit') || '';
 
+      // Capitalize first letter of each key in data
+      const dataCapKeys: Record<string, string> = {};
+      Object.entries(data).forEach(([k, v]) => {
+        dataCapKeys[k.charAt(0).toUpperCase() + k.slice(1)] = v;
+      });
+
       const payload = {
         project,
         form_id: formId,
-        data,
+        data: dataCapKeys,
         tracking: { ...tracking, first_visit: firstVisit, submitted_at: new Date().toISOString(), page_url: window.location.href },
       };
 

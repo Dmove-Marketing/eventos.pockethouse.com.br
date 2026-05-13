@@ -2,23 +2,24 @@
 // Gerado a partir de: eventos-corporativos.html
 import Base from '../layouts/Base.astro';
 import config from '../../config.json';
-import Img from '../components/ui/Img.astro';
-import { getImage } from 'astro:assets';
-import heroRaw from '../assets/images/hero.pocket_resultado.webp';
+import LeadForm from '../components/forms/LeadForm.astro';
 import '../styles/eventos-corporativos.css';
-
-const bgHero = await getImage({ src: heroRaw });
 ---
 
 <Base
   title="Espaços para Eventos Corporativos · São Paulo"
-  ogImage="/pocket.house-ogImages.png"
+  ogImage="/images/og-eventos-corporativos.jpg"
 >
-  <link slot="head" rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" />
 <!-- NAVBAR -->
     <nav>
         <a href="#" class="logo">
-            <Img src="logo.pocket.png" alt="Pocket House" height={44} width={160} priority class="nav-logo-img" />
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
+                    <polyline points="9 22 9 12 15 12 15 22" style="fill:none;stroke:white;stroke-width:1.5" />
+                </svg>
+            </div>
+            <span class="logo-text">Espaços<span>SP</span></span>
         </a>
 
         <ul class="nav-links">
@@ -30,8 +31,7 @@ const bgHero = await getImage({ src: heroRaw });
     </nav>
 
     <!-- HERO -->
-    <section class="hero" id="formulario" style={`background-image: url(${bgHero.src}); background-size: cover; background-position: center;`}>
-        <div class="hero-overlay"></div>
+    <section class="hero" id="formulario">
         <div class="hero-left">
             <div class="hero-badge">Eventos corporativos · São Paulo</div>
 
@@ -45,110 +45,27 @@ const bgHero = await getImage({ src: heroRaw });
 
         <div class="hero-right">
             <div class="form-card">
-                <div id="ecFormBody">
-                    <h3 class="form-title">Solicite um orçamento</h3>
-                    <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
+                <h3 class="form-title">Solicite um orçamento</h3>
+                <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
 
-                    <form
-                      id="form-lead-form"
-                      name="lead-form"
-                      data-form-id="lead-form"
-                      data-project={config.project_slug}
-                      data-submit-url={config.forms['lead-form'].webhooks[0]}
-                      data-redirect={config.forms['lead-form'].redirect_on_success}
-                      data-grid-id="ecFormBody"
-                      data-success-id="ecSuccess"
-                      novalidate
-                    >
-                      <div style="display:none" aria-hidden="true">
-                        <input type="text" name="website" tabindex="-1" autocomplete="off" />
-                      </div>
+                <LeadForm
+                  formId="lead-form"
+                  project={config.project_slug}
+                  submitUrl={config.forms['lead-form'].webhooks[0]}
+                  redirectUrl={config.forms['lead-form'].redirect_on_success}
+                  submitText="Solicitar orçamento"
+                  honeypot
+                  fields={[
 
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="nome">Nome</label>
-                          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="telefone">WhatsApp</label>
-                          <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
-                        </div>
-                      </div>
+                  ]}
+                />
 
-                      <div class="form-group">
-                        <label for="email">E-mail corporativo</label>
-                        <input type="email" id="email" name="email" placeholder="voce@empresa.com.br" required>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="tipo">Tipo de evento</label>
-                          <select id="tipo" name="tipo" required>
-                            <option value="">Selecione</option>
-                            <option>Conferência / Palestra</option>
-                            <option>Workshop / Treinamento</option>
-                            <option>Confraternização corporativa</option>
-                            <option>Offsite corporativo</option>
-                            <option>Reunião de Networking</option>
-                            <option>Lançamento de produto</option>
-                            <option>Happy Hour</option>
-                            <option>Outro</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="data">Data do evento</label>
-                          <input type="text" id="data" name="data" placeholder="Data do evento" required readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="convidados">Nº de pessoas</label>
-                          <input type="number" id="convidados" name="convidados" placeholder="Ex: 80" min="1" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="unidade">Unidade</label>
-                          <select id="unidade" name="unidade">
-                            <option value="">Selecione</option>
-                            <option>Villa Lobos</option>
-                            <option>Alto de Pinheiros</option>
-                            <option>Panamericana</option>
-                            <option>Ainda não sei</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="mensagem">Mensagem (opcional)</label>
-                        <textarea id="mensagem" name="mensagem" placeholder="Conte mais sobre o seu evento…"></textarea>
-                      </div>
-
-                      <input type="hidden" name="fonte" value="Landing page/eventos-corporativos">
-
-                      <button type="submit" class="btn btn-primary" id="lead-formSubmitBtn">
-                        <span class="btn-text">Solicitar orçamento</span>
-                        <span class="btn-loading" style="display:none">Enviando...</span>
-                        <svg viewBox="0 0 24 24">
-                          <path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        </svg>
-                      </button>
-                    </form>
-
-                    <p class="form-note">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
-                        Seus dados estão protegidos. Sem spam.
-                    </p>
-                </div>
-
-                <div id="ecSuccess" class="ec-success">
-                    <div class="ec-success-icon">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <div class="ec-success-title">Solicitação recebida!</div>
-                    <p class="ec-success-text">Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail.</p>
-                </div>
+                <p class="form-note">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Seus dados estão protegidos. Sem spam.
+                </p>
             </div>
         </div>
     </section>
@@ -159,7 +76,7 @@ const bgHero = await getImage({ src: heroRaw });
     <section class="units-section" id="unidades">
         <div class="section-header">
             <span class="section-tag">Nossas unidades</span>
-            <h2>Encontre o espaço ideal<br><span class="text-green">para o seu evento</span></h2>
+            <h2>Encontre o espaço ideal para o seu evento</h2>
             <p class="section-lead">Três unidades exclusivas em São Paulo, cada uma projetada para receber eventos
                 corporativos com sofisticação e estrutura completa.</p>
         </div>
@@ -167,7 +84,11 @@ const bgHero = await getImage({ src: heroRaw });
         <div class="units-grid">
             <!-- Card 1 -->
             <div class="unit-card">
-                <Img src="Villa-lobos.pocket_resultado.webp" alt="Villa Lobos" class="unit-image" />
+                <div class="unit-image-placeholder unit-img-1">
+                    <svg viewBox="0 0 24 24" fill="rgba(55,137,136,0.5)">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
+                    </svg>
+                </div>
                 <div class="unit-body">
                     <h3 class="unit-name">Villa Lobos</h3>
                     <span class="unit-capacity">
@@ -184,7 +105,11 @@ const bgHero = await getImage({ src: heroRaw });
 
             <!-- Card 2 -->
             <div class="unit-card">
-                <Img src="Alto-pinheiros.pocket_resultado.webp" alt="Alto de Pinheiros" class="unit-image" />
+                <div class="unit-image-placeholder unit-img-2">
+                    <svg viewBox="0 0 24 24" fill="rgba(55,137,136,0.5)">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
+                    </svg>
+                </div>
                 <div class="unit-body">
                     <h3 class="unit-name">Alto de Pinheiros</h3>
                     <span class="unit-capacity">
@@ -201,7 +126,11 @@ const bgHero = await getImage({ src: heroRaw });
 
             <!-- Card 3 -->
             <div class="unit-card">
-                <Img src="Panamericana.pocket_resultado.webp" alt="Panamericana" class="unit-image" />
+                <div class="unit-image-placeholder unit-img-3">
+                    <svg viewBox="0 0 24 24" fill="rgba(55,137,136,0.5)">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
+                    </svg>
+                </div>
                 <div class="unit-body">
                     <h3 class="unit-name">Panamericana</h3>
                     <span class="unit-capacity">
@@ -226,12 +155,60 @@ const bgHero = await getImage({ src: heroRaw });
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item g1"><Img src="galeria01.pocket_resultado.webp" alt="Galeria 1" /></div>
-            <div class="gallery-item g2"><Img src="galeria02.pocket_resultado.webp" alt="Galeria 2" /></div>
-            <div class="gallery-item g3"><Img src="galeria03.pocket_resultado.webp" alt="Galeria 3" /></div>
-            <div class="gallery-item g4"><Img src="galeria04.pocket_resultado.webp" alt="Galeria 4" /></div>
-            <div class="gallery-item g5"><Img src="galeria05.pocket_resultado.webp" alt="Galeria 5" /></div>
-            <div class="gallery-item g6"><Img src="galeria06.pocket_resultado.webp" alt="Galeria 6" /></div>
+            <div class="gallery-item g1">
+                <div class="gph gph-1" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            <div class="gallery-item g2">
+                <div class="gph gph-2" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            <div class="gallery-item g3">
+                <div class="gph gph-3" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            <div class="gallery-item g4">
+                <div class="gph gph-4" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            <div class="gallery-item g5">
+                <div class="gph gph-5" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            <div class="gallery-item g6">
+                <div class="gph gph-6" style="height:100%">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                            stroke="white" stroke-width="1.5" fill="none" />
+                        <circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                </div>
+            </div>
         </div>
 
         <div class="gallery-cta">
@@ -440,35 +417,29 @@ const bgHero = await getImage({ src: heroRaw });
             </div>
 
         </div>
-
-        <div class="gallery-cta">
-            <button class="btn btn-primary btn-lg" onclick="scrollToForm()">
-                Solicitar orçamento
-                <svg viewBox="0 0 24 24"
-                    style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-            </button>
-        </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="site-footer-left">
-            <span class="site-footer-copy">© 2026 Pocket House · Todos os direitos reservados</span>
-            <a href="mailto:contato@espacosp.com.br" class="site-footer-link">contato@espacosp.com.br</a>
+    <footer id="contato">
+        <div class="footer-logo">
+            <div class="footer-logo-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" fill="white" />
+                </svg>
+            </div>
+            <span class="footer-brand">EspaçosSP</span>
         </div>
-        <div class="site-footer-right">
-            <span class="site-footer-dev">Desenvolvido por:</span>
-            <a href="https://dmove.com.br/" target="_blank" rel="noopener noreferrer">
-                <img src="https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2024/01/Logotipo.png.webp" alt="Dmove" class="site-footer-logo" />
-            </a>
+
+        <div class="footer-copy">© 2025 EspaçosSP · Todos os direitos reservados</div>
+
+        <div class="footer-contact">
+            <a href="mailto:contato@espacosp.com.br">contato@espacosp.com.br</a><br>
+            <a href="tel:+551140020000">(11) 4002-0000</a>
         </div>
     </footer>
 
     
 </Base>
 <script>
-  import '../scripts/forms.ts';
   import '../scripts/eventos-corporativos.js';
 </script>
