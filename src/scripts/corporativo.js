@@ -153,3 +153,27 @@ function initGaleriaMobile() {
 }
 
 initGaleriaMobile();
+
+// Preload da galeria ao chegar na seção parceiros
+function initGaleriaPreload() {
+  const parceiros = document.querySelector('.parceiros');
+  const galeriaImgs = document.querySelectorAll('.galeria-item img');
+  if (!parceiros || !galeriaImgs.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      galeriaImgs.forEach(img => {
+        const src = img.getAttribute('src');
+        if (src) {
+          const preloader = new Image();
+          preloader.src = src;
+        }
+      });
+      observer.disconnect();
+    }
+  }, { threshold: 0.1 });
+
+  observer.observe(parceiros);
+}
+
+initGaleriaPreload();
