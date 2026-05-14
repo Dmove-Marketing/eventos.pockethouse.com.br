@@ -2,7 +2,7 @@
   "project_name": "pocket-house",
   "project_slug": "pocket-house",
   "client": "Pocket House",
-  "environment": "development",
+  "production": "development",
   "tracking": {
     "gtm_id": "GTM-MPX6D24X",
     "enabled": true

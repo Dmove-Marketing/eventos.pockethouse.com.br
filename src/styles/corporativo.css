@@ -65,10 +65,9 @@ nav .logo {
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 36px;
   width: auto;
   display: block;
-  object-fit: contain;
 }
 
 .nav-links {
@@ -121,7 +120,7 @@ nav .logo {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.45) 100%);
   pointer-events: none;
 }
 
@@ -479,6 +478,8 @@ section { padding: 100px 5%; }
   width: 100%;
   height: 100%;
   overflow: hidden;
+  -webkit-transform: translateZ(0); /* iOS Safari: força compositor layer para overflow:hidden funcionar com filho transformado */
+  transform: translateZ(0);
 }
 
 .carrossel-track {
@@ -1263,7 +1264,7 @@ section { padding: 100px 5%; }
 footer {
   background: var(--gray-800);
   color: rgba(255,255,255,0.6);
-  padding: 48px 5%;
+  padding: 34px 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1277,10 +1278,9 @@ footer {
 }
 
 .footer-logo-img {
-  height: 36px;
+  height: 30px;
   width: auto;
   display: block;
-  object-fit: contain;
 }
 
 .footer-text {
@@ -1302,7 +1302,7 @@ footer {
 }
 
 .footer-dmove-logo {
-  height: 42px;
+  height: 50px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -1340,11 +1340,16 @@ footer {
     min-height: auto;
   }
   .hero::before {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.45) 100%);
   }
   .hero-right { display: none; }
 
   .stats-inner { grid-template-columns: 1fr; }
+
+  .stat-item:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+  }
 
   .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .sobre-img-accent { display: none; }
@@ -1354,7 +1359,7 @@ footer {
   .dif-grid { grid-template-columns: 1fr 1fr; }
   .dep-grid { grid-template-columns: 1fr 1fr; }
 
-  .galeria-container { width: 100%; overflow: hidden; }
+  .galeria-container { width: 100%; overflow: hidden; -webkit-transform: translateZ(0); transform: translateZ(0); }
 
   .galeria-grid {
     display: flex;

@@ -91,6 +91,7 @@ function initCarrossel(id) {
   const total = track.children.length;
   const originalCount = total - 1;
   let current = 0;
+  let intervalId;
 
   function goTo(n) {
     current = n;
@@ -107,7 +108,26 @@ function initCarrossel(id) {
     }
   });
 
-  setInterval(() => goTo(current + 1), 6000);
+  function restart() {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => goTo(current + 1), 6000);
+  }
+
+  // Swipe (mobile)
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      goTo(diff > 0 ? current + 1 : Math.max(0, current - 1));
+      restart();
+    }
+  }, { passive: true });
+
+  restart();
 }
 
 initCarrossel('carrossel-vl');
@@ -143,6 +163,20 @@ function initGaleriaMobile() {
     clearInterval(timer);
     timer = setInterval(() => goTo(current + 1), 6000);
   }
+
+  // Swipe (mobile)
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      goTo(diff > 0 ? current + 1 : Math.max(0, current - 1));
+      startTimer();
+    }
+  }, { passive: true });
 
   track.addEventListener('click', () => {
     goTo(current + 1);
