@@ -875,6 +875,7 @@
 
             .g1, .g2, .g3, .g4, .g5, .g6 {
                 grid-column: 1;
+                grid-row: auto;
                 height: 260px;
             }
 
@@ -924,6 +925,7 @@
             .g5,
             .g6 {
                 grid-column: 1;
+                grid-row: auto;
                 height: 200px;
             }
         }
