@@ -82,52 +82,47 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 // Carrosseis
 function initCarrossel(id) {
-  const track = document.querySelector(`#${id} .carrossel-track`);
-  if (!track) return;
+  const wrap = document.getElementById(id);
+  if (!wrap) return;
+  const track = wrap.querySelector('.carrossel-track');
+  if (!track || !track.children.length) return;
 
-  // Clona o primeiro slide e adiciona no final para loop seamless
   track.appendChild(track.children[0].cloneNode(true));
 
-  const total = track.children.length;
-  const originalCount = total - 1;
+  const realCount = track.children.length - 1;
   let current = 0;
-  let intervalId;
+  let timer;
 
-  function goTo(n) {
+  function slideTo(n) {
     current = n;
-    track.style.transition = 'transform 0.7s ease';
+    track.style.transition = 'transform 0.6s ease';
     track.style.transform = `translateX(-${current * 100}%)`;
   }
 
-  // Quando chega no clone do primeiro, salta invisível para o real
   track.addEventListener('transitionend', () => {
-    if (current === originalCount) {
+    if (current >= realCount) {
       track.style.transition = 'none';
       current = 0;
       track.style.transform = 'translateX(0%)';
     }
   });
 
-  function restart() {
-    clearInterval(intervalId);
-    intervalId = setInterval(() => goTo(current + 1), 6000);
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => slideTo(current + 1), 5000);
   }
 
-  // Swipe (mobile)
-  let touchStartX = 0;
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      goTo(diff > 0 ? current + 1 : Math.max(0, current - 1));
-      restart();
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) {
+      slideTo(dx > 0 ? current + 1 : Math.max(0, current - 1));
+      start();
     }
   }, { passive: true });
 
-  restart();
+  start();
 }
 
 initCarrossel('carrossel-vl');
@@ -136,54 +131,45 @@ initCarrossel('carrossel-pan');
 
 // Galeria mobile carousel
 function initGaleriaMobile() {
-  const track = document.querySelector('.galeria-grid');
-  if (!track || getComputedStyle(track).display !== 'flex') return;
+  const grid = document.querySelector('.galeria-grid');
+  if (!grid || getComputedStyle(grid).display !== 'flex') return;
 
-  track.appendChild(track.children[0].cloneNode(true));
+  grid.appendChild(grid.children[0].cloneNode(true));
 
-  const originalCount = track.children.length - 1;
+  const realCount = grid.children.length - 1;
   let current = 0;
   let timer;
 
-  function goTo(n) {
+  function slideTo(n) {
     current = n;
-    track.style.transition = 'transform 0.7s ease';
-    track.style.transform = `translateX(-${current * 100}%)`;
+    grid.style.transition = 'transform 0.6s ease';
+    grid.style.transform = `translateX(-${current * 100}%)`;
   }
 
-  track.addEventListener('transitionend', () => {
-    if (current === originalCount) {
-      track.style.transition = 'none';
+  grid.addEventListener('transitionend', () => {
+    if (current >= realCount) {
+      grid.style.transition = 'none';
       current = 0;
-      track.style.transform = 'translateX(0%)';
+      grid.style.transform = 'translateX(0%)';
     }
   });
 
-  function startTimer() {
+  function start() {
     clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 6000);
+    timer = setInterval(() => slideTo(current + 1), 5000);
   }
 
-  // Swipe (mobile)
-  let touchStartX = 0;
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      goTo(diff > 0 ? current + 1 : Math.max(0, current - 1));
-      startTimer();
+  let tx = 0;
+  grid.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+  grid.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) {
+      slideTo(dx > 0 ? current + 1 : Math.max(0, current - 1));
+      start();
     }
   }, { passive: true });
 
-  track.addEventListener('click', () => {
-    goTo(current + 1);
-    startTimer();
-  });
-
-  startTimer();
+  start();
 }
 
 initGaleriaMobile();

@@ -485,8 +485,6 @@ section { padding: 100px 5%; }
 .carrossel-track {
   display: flex;
   height: 100%;
-  transition: transform 0.7s ease;
-  will-change: transform;
 }
 
 .carrossel-track > * {
@@ -1343,6 +1341,9 @@ footer {
     background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.45) 100%);
   }
   .hero-right { display: none; }
+
+  .hero h1 { font-size: 26px; }
+  .hero-left > p { font-size: 15px; }
 
   .stats-inner { grid-template-columns: 1fr; }
 
