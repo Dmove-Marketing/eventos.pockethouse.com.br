@@ -37,6 +37,7 @@ type AnyField = Field | FieldRow;
 
 interface Props {
   formId: string;
+  formName?: string;
   project: string;
   apiUrl?: string;
   submitUrl?: string;
@@ -54,6 +55,7 @@ interface Props {
 
 const {
   formId,
+  formName,
   project,
   apiUrl = '',
   submitUrl,
@@ -130,6 +132,7 @@ const groupCls  = (full?: boolean) => {
   name={formId}
   class:list={[!prefix && 'lead-form', className]}
   data-form-id={formId}
+  data-form-name={formName}
   data-project={project}
   data-api-url={apiUrl}
   data-submit-url={submitUrl}
