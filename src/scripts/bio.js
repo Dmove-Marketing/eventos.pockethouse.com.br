@@ -1,24 +1,24 @@
-/* Scripts extraídos de bio.html */
+/* bio.js */
 
-// WhatsApp mask
-    document.getElementById('whatsapp').addEventListener('input', function (e) {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-      if (v.length > 6) v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
-      else if (v.length > 2) v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
-      else if (v.length > 0) v = '(' + v;
-      e.target.value = v;
-    });
+// Máscara de telefone
+const telInput = document.getElementById('telefone');
+if (telInput) {
+  telInput.addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 6) v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+    else if (v.length > 2) v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+    else if (v.length > 0) v = '(' + v;
+    this.value = v;
+  });
+}
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = 'Enviando…';
-
-      // Simulate send
-      setTimeout(() => {
-        document.getElementById('formWrap').style.display = 'none';
-        const sm = document.getElementById('successMsg');
-        sm.style.display = 'flex';
-      }, 1200);
-    }
+// Calendário flatpickr no campo Data do evento
+const dataInput = document.getElementById('data');
+if (dataInput && typeof flatpickr !== 'undefined') {
+  flatpickr(dataInput, {
+    locale: 'pt',
+    dateFormat: 'd/m/Y',
+    minDate: 'today',
+    disableMobile: true,
+  });
+}

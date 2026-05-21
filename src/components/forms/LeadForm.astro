@@ -252,13 +252,7 @@ const groupCls  = (full?: boolean) => {
 </form>
 
 <script>
-  import { initForms } from '../../scripts/forms.ts';
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initForms);
-  } else {
-    initForms();
-  }
+  import '../../scripts/forms.ts';
 </script>
 
 <style>

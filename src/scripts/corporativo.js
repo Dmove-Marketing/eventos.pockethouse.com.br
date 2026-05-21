@@ -41,24 +41,14 @@ if (horarioInput) {
   });
 }
 
-// Data do evento: DD/MM/AAAA
-const dataInput = document.getElementById('data_evento');
-if (dataInput) {
-  dataInput.addEventListener('input', function () {
-    let digits = this.value.replace(/\D/g, '').slice(0, 8);
-
-    // Valida dia (máx 31)
-    if (digits.length >= 2 && parseInt(digits.slice(0, 2)) > 31) digits = '31' + digits.slice(2);
-    if (digits.length >= 1 && parseInt(digits[0]) > 3) digits = '0' + digits.slice(0, 7);
-    // Valida mês (máx 12)
-    if (digits.length >= 4 && parseInt(digits.slice(2, 4)) > 12) digits = digits.slice(0, 2) + '12' + digits.slice(4);
-    if (digits.length >= 3 && parseInt(digits[2]) > 1) digits = digits.slice(0, 2) + '0' + digits.slice(2, 7);
-
-    let v = digits;
-    if (v.length > 4) v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
-    else if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
-
-    this.value = v;
+// Calendário flatpickr no campo Data do evento
+const dataEvento = document.getElementById('data_evento');
+if (dataEvento && typeof flatpickr !== 'undefined') {
+  flatpickr(dataEvento, {
+    locale: 'pt',
+    dateFormat: 'd/m/Y',
+    minDate: 'today',
+    disableMobile: true,
   });
 }
 

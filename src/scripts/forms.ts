@@ -68,8 +68,9 @@ const fieldNameMap: Record<string, string> = {
 };
 
 export function initForms() {
-  const forms = document.querySelectorAll<HTMLFormElement>('form[data-form-id]');
+  const forms = document.querySelectorAll<HTMLFormElement>('form[data-form-id]:not([data-forms-init])');
   forms.forEach((form) => {
+    form.setAttribute('data-forms-init', '1');
     let started = false;
     const formId   = form.dataset.formId!;
     const formName = form.dataset.formName || form.getAttribute('name') || formId;
