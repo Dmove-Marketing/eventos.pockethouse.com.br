@@ -1,7 +1,6 @@
 ---
 // Gerado a partir de: bio.html
 import Base from '../layouts/Base.astro';
-import config from '../../config.json';
 import Img from '../components/ui/Img.astro';
 import { getImage } from 'astro:assets';
 import bgHeroRaw from '../assets/images/hero.pocket_resultado.webp';
@@ -15,9 +14,6 @@ const bgHero = await getImage({ src: bgHeroRaw });
   description="Espaços para eventos corporativos em São Paulo. Villa Lobos, Alto de Pinheiros e Panamericana. Solicite seu orçamento."
   ogImage="/pocket.house-ogImages.png"
 >
-  <link slot="head" rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" />
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr"></script>
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
 <!-- ═══════════════════════════════════════════
      BACKGROUND: troque "BACKGROUND-AQUI.jpg"
      pelo caminho ou URL da sua imagem de fundo
@@ -43,116 +39,20 @@ const bgHero = await getImage({ src: bgHeroRaw });
   </div>
 
 
-  <!-- FORM CARD -->
+  <!-- CTA CARD -->
   <div class="form-card">
     <div class="form-top-bar"></div>
-
-    <!-- FORM -->
-    <div class="form-body" id="formWrap">
+    <div class="form-body">
       <h2 class="form-title">Solicite um orçamento</h2>
-      <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
-
-      <form
-        id="form-lead-form"
-        name="lead-form"
-        data-form-id="lead-form"
-        data-form-name="bio_lead"
-        data-project={config.project_slug}
-        data-submit-url={config.forms['lead-form'].webhooks[0]}
-        data-redirect={config.forms['lead-form'].redirect_on_success}
-        data-grid-id="formWrap"
-        data-success-id="successMsg"
-        novalidate
-      >
-        <div style="display:none" aria-hidden="true">
-          <input type="text" name="website" tabindex="-1" autocomplete="off" />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-          </div>
-          <div class="form-group">
-            <label for="telefone">WhatsApp</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-mail corporativo</label>
-          <input type="email" id="email" name="email" placeholder="voce@empresa.com.br" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="tipo">Tipo de evento</label>
-            <div class="select-wrap">
-              <select id="tipo" name="tipo" required>
-                <option value="">Selecione</option>
-                <option>Conferência / Palestra</option>
-                <option>Workshop / Treinamento</option>
-                <option>Confraternização corporativa</option>
-                <option>Offsite corporativo</option>
-                <option>Reunião de Networking</option>
-                <option>Lançamento de produto</option>
-                <option>Happy Hour</option>
-                <option>Outro</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="data">Data do evento</label>
-            <input type="text" id="data" name="data" placeholder="Data do evento" required readonly>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="convidados">Nº de pessoas</label>
-            <input type="number" id="convidados" name="convidados" placeholder="Ex: 80" min="1" required>
-          </div>
-          <div class="form-group">
-            <label for="unidade">Unidade</label>
-            <div class="select-wrap">
-              <select id="unidade" name="unidade">
-                <option value="">Selecione</option>
-                <option>Villa Lobos</option>
-                <option>Alto de Pinheiros</option>
-                <option>Panamericana</option>
-                <option>Ainda não sei</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="mensagem">Mensagem (opcional)</label>
-          <textarea id="mensagem" name="mensagem" placeholder="Conte mais sobre o seu evento…"></textarea>
-        </div>
-
-        <input type="hidden" name="fonte" value="Landing page/bio">
-
-        <button type="submit" class="btn-submit" id="lead-formSubmitBtn">
-          <span class="btn-text">Enviar solicitação</span>
-          <span class="btn-loading" style="display:none">Enviando...</span>
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </form>
-
+      <p class="form-subtitle">Fale com nossa equipe pelo WhatsApp e receba uma proposta personalizada para o seu evento.</p>
+      <button class="btn-submit" onclick="openWhatsApp()">
+        <span class="btn-text">Falar no WhatsApp</span>
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
       <p class="form-note">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Seus dados estão protegidos. Sem spam.
+        Resposta rápida. Sem compromisso.
       </p>
-    </div>
-
-    <!-- SUCCESS -->
-    <div class="success-msg" id="successMsg">
-      <div class="success-icon">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div class="success-title">Solicitação recebida!</div>
-      <p class="success-text">Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail.</p>
     </div>
   </div>
 
@@ -174,6 +74,6 @@ const bgHero = await getImage({ src: bgHeroRaw });
 
 </Base>
 <script>
-  import '../scripts/forms.ts';
+  import '../scripts/whatsapp.ts';
   import '../scripts/bio.js';
 </script>

@@ -3,7 +3,6 @@
 import Base from '../layouts/Base.astro';
 import config from '../../config.json';
 import Img from '../components/ui/Img.astro';
-import LeadForm from '../components/forms/LeadForm.astro';
 import { getImage } from 'astro:assets';
 import heroRaw from '../assets/images/hero.pocket_resultado.webp';
 import '../styles/corporativo.css';
@@ -28,9 +27,6 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
   <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
   <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link slot="head" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link slot="head" rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" />
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr"></script>
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
 
 <!-- NAVBAR -->
 <nav>
@@ -401,7 +397,7 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
       <div class="contato-info fade-up">
         <div class="section-tag">Contato</div>
         <h2 class="section-title">Vamos dar forma<br>ao seu próximo<br><em>evento corporativo?</em></h2>
-        <p>Preencha seus dados e receba um orçamento personalizado para sua empresa. Nossa equipe retorna em até 24 horas.</p>
+        <p>Fale com nossa equipe pelo WhatsApp e receba um orçamento personalizado para o seu evento corporativo.</p>
         <div class="contato-detail">
           <div class="contato-item">
             <div class="contato-item-icon">
@@ -426,43 +422,11 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
 
       <div class="form-card fade-up">
         <h3 class="form-title">Solicite um orçamento</h3>
-        <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
-
-        <LeadForm
-          formId="lead-form"
-          formName="corp_lead"
-          prefix="corp"
-          project={config.project_slug}
-          submitUrl={config.forms['lead-form'].webhooks[0]}
-          redirectUrl={config.forms['lead-form'].redirect_on_success}
-          submitText="Solicitar Orçamento"
-          honeypot
-          successTitle="Solicitação recebida!"
-          successText="Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail."
-          fields={[
-            { type: 'row', fields: [
-              { name: 'nome',     type: 'text', label: 'Nome',     placeholder: 'Seu nome completo',  required: true },
-              { name: 'telefone', type: 'tel',  label: 'Telefone', placeholder: '(11) 90000-0000',    required: true },
-            ]},
-            { name: 'email',   type: 'email', label: 'E-mail',  placeholder: 'seu@email.com', required: true, full: true },
-            { name: 'empresa', type: 'text',  label: 'Empresa', placeholder: 'Nome da empresa', full: true },
-            { type: 'row', fields: [
-              { name: 'data_evento', type: 'text',   label: 'Data do evento',    placeholder: 'DD/MM/AAAA' },
-              { name: 'horario',     type: 'text',   label: 'Horário',           placeholder: '00:00' },
-            ]},
-            { type: 'row', fields: [
-              { name: 'convidados', type: 'number', label: 'Nº de convidados', placeholder: 'Ex: 80', min: '1' },
-              { name: 'unidade',    type: 'select', label: 'Unidade', options: [
-                { value: '',                  label: 'Selecione',         disabled: true, selected: true },
-                { value: 'Villa-Lobos',       label: 'Villa-Lobos' },
-                { value: 'Alto de Pinheiros', label: 'Alto de Pinheiros' },
-                { value: 'Panamericana',      label: 'Panamericana' },
-                { value: 'Ainda não sei',     label: 'Ainda não sei' },
-              ]},
-            ]},
-            { name: 'fonte', type: 'hidden', value: 'Landing page/corporativo' },
-          ]}
-        />
+        <p class="form-subtitle">Fale com nossa equipe e receba uma proposta personalizada para o seu evento.</p>
+        <button class="btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem;display:flex;gap:.5rem" onclick="openWhatsApp()">
+          Falar no WhatsApp
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -485,5 +449,6 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
 
 </Base>
 <script>
+  import '../scripts/whatsapp.ts';
   import '../scripts/corporativo.js';
 </script>

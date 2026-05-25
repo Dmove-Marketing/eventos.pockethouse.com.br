@@ -1,7 +1,6 @@
 ---
 // Gerado a partir de: eventos-corporativos.html
 import Base from '../layouts/Base.astro';
-import config from '../../config.json';
 import Img from '../components/ui/Img.astro';
 import { getImage } from 'astro:assets';
 import heroRaw from '../assets/images/hero.pocket_resultado.webp';
@@ -14,9 +13,6 @@ const bgHero = await getImage({ src: heroRaw });
   title="Espaços para Eventos Corporativos · São Paulo"
   ogImage="/pocket.house-ogImages.png"
 >
-  <link slot="head" rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" />
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr"></script>
-  <script slot="head" is:inline src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
 <!-- NAVBAR -->
     <nav>
         <a href="#" class="logo">
@@ -47,111 +43,20 @@ const bgHero = await getImage({ src: heroRaw });
 
         <div class="hero-right">
             <div class="form-card">
-                <div id="ecFormBody">
-                    <h3 class="form-title">Solicite um orçamento</h3>
-                    <p class="form-subtitle">Preencha abaixo e nossa equipe retorna em até 24 horas.</p>
-
-                    <form
-                      id="form-lead-form"
-                      name="lead-form"
-                      data-form-id="lead-form"
-                      data-form-name="ec_lead"
-                      data-project={config.project_slug}
-                      data-submit-url={config.forms['lead-form'].webhooks[0]}
-                      data-redirect={config.forms['lead-form'].redirect_on_success}
-                      data-grid-id="ecFormBody"
-                      data-success-id="ecSuccess"
-                      novalidate
-                    >
-                      <div style="display:none" aria-hidden="true">
-                        <input type="text" name="website" tabindex="-1" autocomplete="off" />
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="nome">Nome</label>
-                          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="telefone">WhatsApp</label>
-                          <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="email">E-mail corporativo</label>
-                        <input type="email" id="email" name="email" placeholder="voce@empresa.com.br" required>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="tipo">Tipo de evento</label>
-                          <select id="tipo" name="tipo" required>
-                            <option value="">Selecione</option>
-                            <option>Conferência / Palestra</option>
-                            <option>Workshop / Treinamento</option>
-                            <option>Confraternização corporativa</option>
-                            <option>Offsite corporativo</option>
-                            <option>Reunião de Networking</option>
-                            <option>Lançamento de produto</option>
-                            <option>Happy Hour</option>
-                            <option>Outro</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="data">Data do evento</label>
-                          <input type="text" id="data" name="data" placeholder="Data do evento" required readonly>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                          <label for="convidados">Nº de pessoas</label>
-                          <input type="number" id="convidados" name="convidados" placeholder="Ex: 80" min="1" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="unidade">Unidade</label>
-                          <select id="unidade" name="unidade">
-                            <option value="">Selecione</option>
-                            <option>Villa Lobos</option>
-                            <option>Alto de Pinheiros</option>
-                            <option>Panamericana</option>
-                            <option>Ainda não sei</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="mensagem">Mensagem (opcional)</label>
-                        <textarea id="mensagem" name="mensagem" placeholder="Conte mais sobre o seu evento…"></textarea>
-                      </div>
-
-                      <input type="hidden" name="fonte" value="Landing page/eventos-corporativos">
-
-                      <button type="submit" class="btn btn-primary" id="lead-formSubmitBtn">
-                        <span class="btn-text">Solicitar orçamento</span>
-                        <span class="btn-loading" style="display:none">Enviando...</span>
-                        <svg viewBox="0 0 24 24">
-                          <path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        </svg>
-                      </button>
-                    </form>
-
-                    <p class="form-note">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
-                        Seus dados estão protegidos. Sem spam.
-                    </p>
-                </div>
-
-                <div id="ecSuccess" class="ec-success">
-                    <div class="ec-success-icon">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <div class="ec-success-title">Solicitação recebida!</div>
-                    <p class="ec-success-text">Recebemos seu pedido de orçamento.<br>Em breve entraremos em contato pelo WhatsApp ou e-mail.</p>
-                </div>
+                <h3 class="form-title">Solicite um orçamento</h3>
+                <p class="form-subtitle">Fale com nossa equipe pelo WhatsApp e receba uma proposta personalizada para o seu evento.</p>
+                <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem" onclick="openWhatsApp()">
+                    Falar no WhatsApp
+                    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <p class="form-note">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Resposta rápida. Sem compromisso.
+                </p>
             </div>
         </div>
     </section>
@@ -181,7 +86,7 @@ const bgHero = await getImage({ src: heroRaw });
                         </svg>
                         Até 230 pessoas
                     </span>
-                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                    <button class="btn btn-outline" onclick="openWhatsApp()">Solicitar orçamento</button>
                 </div>
             </div>
 
@@ -198,7 +103,7 @@ const bgHero = await getImage({ src: heroRaw });
                         </svg>
                         Até 80 pessoas
                     </span>
-                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                    <button class="btn btn-outline" onclick="openWhatsApp()">Solicitar orçamento</button>
                 </div>
             </div>
 
@@ -215,7 +120,7 @@ const bgHero = await getImage({ src: heroRaw });
                         </svg>
                         Até 150 pessoas
                     </span>
-                    <button class="btn btn-outline" onclick="scrollToForm()">Solicitar orçamento</button>
+                    <button class="btn btn-outline" onclick="openWhatsApp()">Solicitar orçamento</button>
                 </div>
             </div>
         </div>
@@ -238,7 +143,7 @@ const bgHero = await getImage({ src: heroRaw });
         </div>
 
         <div class="gallery-cta">
-            <button class="btn btn-primary btn-lg" onclick="scrollToForm()">
+            <button class="btn btn-primary btn-lg" onclick="openWhatsApp()">
                 Solicitar orçamento
                 <svg viewBox="0 0 24 24"
                     style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
@@ -445,7 +350,7 @@ const bgHero = await getImage({ src: heroRaw });
         </div>
 
         <div class="gallery-cta">
-            <button class="btn btn-primary btn-lg" onclick="scrollToForm()">
+            <button class="btn btn-primary btn-lg" onclick="openWhatsApp()">
                 Solicitar orçamento
                 <svg viewBox="0 0 24 24"
                     style="width:16px;height:16px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round">
@@ -472,6 +377,6 @@ const bgHero = await getImage({ src: heroRaw });
     
 </Base>
 <script>
-  import '../scripts/forms.ts';
+  import '../scripts/whatsapp.ts';
   import '../scripts/eventos-corporativos.js';
 </script>
