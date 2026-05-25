@@ -13,4 +13,4 @@ if (!server) {
 
 const dest = `${user}@${server}:${remote_path}`;
 console.log(`Enviando dist/ → ${dest}`);
-execSync(`scp -r dist/* ${dest}`, { stdio: "inherit" });
+execSync(`scp -r dist/. ${dest}`, { stdio: "inherit" });
