@@ -380,7 +380,7 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
       <div class="section-tag">Galeria</div>
       <h2 class="section-title">Onde conceitos viram<br><em>experiências reais</em></h2>
     </div>
-    <div class="galeria-grid fade-up">
+    <div class="galeria-grid">
       {galeriaImages.map((img, i) => (
         <div class="galeria-item">
           <Image src={img} alt={`Galeria ${i + 1}`} width={800} quality={80} loading="eager" />
