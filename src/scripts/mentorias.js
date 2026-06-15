@@ -119,6 +119,57 @@ initCarrossel('carrossel-vl');
 initCarrossel('carrossel-ap');
 initCarrossel('carrossel-pan');
 
+// Carrossel duo: 2 visíveis, avança 1 por vez (passo de 50%)
+function initCarrosselDuo(id) {
+  const wrap = document.getElementById(id);
+  if (!wrap) return;
+  const track = wrap.querySelector('.carrossel-track');
+  if (!track || !track.children.length) return;
+
+  track.appendChild(track.children[0].cloneNode(true));
+
+  const realCount = track.children.length - 1;
+  let current = 0;
+  let timer;
+
+  function getStep() {
+    return (track.children[0].offsetWidth / wrap.offsetWidth) * 100;
+  }
+
+  function slideTo(n) {
+    current = n;
+    track.style.transition = 'transform 0.6s ease';
+    track.style.transform = `translateX(-${current * getStep()}%)`;
+  }
+
+  track.addEventListener('transitionend', () => {
+    if (current >= realCount) {
+      track.style.transition = 'none';
+      current = 0;
+      track.style.transform = 'translateX(0%)';
+    }
+  });
+
+  function start() {
+    clearInterval(timer);
+    timer = setInterval(() => slideTo(current + 1), 5000);
+  }
+
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) {
+      slideTo(dx > 0 ? current + 1 : Math.max(0, current - 1));
+      start();
+    }
+  }, { passive: true });
+
+  start();
+}
+
+initCarrosselDuo('carrossel-condicoes');
+
 // Galeria mobile carousel
 function initGaleriaMobile() {
   const grid = document.querySelector('.galeria-grid');
