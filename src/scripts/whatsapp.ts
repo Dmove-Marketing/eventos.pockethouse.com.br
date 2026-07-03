@@ -1,37 +1,30 @@
-const WA_NUMBER = '5511950759912';
+import { getWhatsAppMessage, buildWhatsAppUrl } from '../lib/whatsapp-message';
 
-function getWAMessage(): string {
-  try {
-    const raw = sessionStorage.getItem('dmove_tracking');
-    const tracking = raw ? JSON.parse(raw) : {};
-    const source = (tracking.utm_source || '').toLowerCase();
-    const medium = (tracking.utm_medium || '').toLowerCase();
+function updateWhatsAppLinks(): void {
+  const utmSource = new URLSearchParams(window.location.search).get('utm_source');
+  const message = getWhatsAppMessage(window.location.pathname, utmSource);
+  const url = buildWhatsAppUrl(message);
 
-    if (source.includes('google') || medium.includes('cpc') || medium.includes('ppc')) {
-      return 'Olá! Pesquisei sobre a Pocket House e gostaria de solicitar um orçamento.';
-    }
-    const hasFbclid = !!tracking.fbclid;
-    if (
-      source.includes('meta') ||
-      source.includes('facebook') ||
-      source.includes('instagram') ||
-      source.includes('fb') ||
-      source === 'ig' ||
-      medium.includes('paid_social') ||
-      medium.includes('social') ||
-      hasFbclid
-    ) {
-      return 'Olá! Me interessei pela Pocket House e gostaria de solicitar um orçamento.';
-    }
-  } catch {}
-  return 'Olá! Gostaria de solicitar um orçamento na Pocket House.';
+  document.querySelectorAll<HTMLAnchorElement>('[data-whatsapp-cta]').forEach((link) => {
+    link.href = url;
+  });
 }
 
-export function openWhatsApp(): void {
-  const msg = getWAMessage();
+function trackWhatsAppClick(event: Event): void {
+  const target = event.target as HTMLElement;
+  if (!target.closest('[data-whatsapp-cta]')) return;
+
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({ event: 'whatsapp_click' });
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-(window as any).openWhatsApp = openWhatsApp;
+function init(): void {
+  updateWhatsAppLinks();
+  document.addEventListener('click', trackWhatsAppClick);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

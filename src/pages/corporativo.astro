@@ -3,11 +3,15 @@
 import Base from '../layouts/Base.astro';
 import config from '../../config.json';
 import Img from '../components/ui/Img.astro';
+import WhatsAppFloat from '../components/ui/WhatsAppFloat.astro';
+import WhatsAppIcon from '../components/ui/WhatsAppIcon.astro';
 import { getImage } from 'astro:assets';
 import heroRaw from '../assets/images/hero.pocket_resultado.webp';
+import { WA_FALLBACK_MESSAGE, buildWhatsAppUrl } from '../lib/whatsapp-message';
 import '../styles/corporativo.css';
 
 const bgHero = await getImage({ src: heroRaw });
+const fallbackWaUrl = buildWhatsAppUrl(WA_FALLBACK_MESSAGE);
 
 const galeriaGlob = import.meta.glob<string>('../assets/images/galeria-corporativa*_resultado.webp', { eager: true, query: '?url', import: 'default' });
 const galeriaImages = Object.entries(galeriaGlob).sort(([a], [b]) => a.localeCompare(b)).map(([, src]) => src);
@@ -417,10 +421,11 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
       <div class="form-card fade-up">
         <h3 class="form-title">Solicite um orçamento</h3>
         <p class="form-subtitle">Fale com nossa equipe e receba uma proposta personalizada para o seu evento.</p>
-        <button class="btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem;display:flex;gap:.5rem" onclick="openWhatsApp()">
+        <a class="btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem;display:flex;gap:.5rem" href={fallbackWaUrl} target="_blank" rel="noopener noreferrer" data-whatsapp-cta>
+          <WhatsAppIcon size={22} />
           Falar no WhatsApp
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -440,6 +445,7 @@ const duoImages = Object.entries(duoGlob).sort(([a], [b]) => a.localeCompare(b))
   </div>
 </footer>
 
+<WhatsAppFloat />
 
 </Base>
 <script>

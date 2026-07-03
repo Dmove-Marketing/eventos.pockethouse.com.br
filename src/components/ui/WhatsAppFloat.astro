@@ -1,10 +1,14 @@
 ---
 // src/components/ui/WhatsAppFloat.astro
 // Botão flutuante de WhatsApp com tracking de clique
-// Uso: <WhatsAppFloat phone="5511999999999" message="Olá!" />
+// Uso: <WhatsAppFloat />
+// A mensagem inicial (SSR) é o fallback; o client script (whatsapp.ts) recalcula
+// o href por rota + utm_source assim que hidrata, via [data-whatsapp-cta].
+
+import { WA_NUMBER, WA_FALLBACK_MESSAGE, buildWhatsAppUrl } from '../../lib/whatsapp-message';
 
 interface Props {
-  phone: string;
+  phone?: string;
   message?: string;
   position?: 'bottom-right' | 'bottom-left';
   showAfterMs?: number;
@@ -12,14 +16,14 @@ interface Props {
 }
 
 const {
-  phone,
-  message = 'Olá! Gostaria de saber mais.',
+  phone = WA_NUMBER,
+  message = WA_FALLBACK_MESSAGE,
   position = 'bottom-right',
   showAfterMs = 2000,
   class: className,
 } = Astro.props;
 
-const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+const whatsappUrl = buildWhatsAppUrl(message, phone.replace(/\D/g, ''));
 ---
 
 <a
@@ -28,6 +32,7 @@ const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIC
   rel="noopener noreferrer"
   class:list={['whatsapp-float', `whatsapp-${position}`, className]}
   data-cta="whatsapp-float"
+  data-whatsapp-cta
   data-show-after={showAfterMs}
   aria-label="Falar pelo WhatsApp"
 >

@@ -2,11 +2,15 @@
 // Gerado a partir de: bio.html
 import Base from '../layouts/Base.astro';
 import Img from '../components/ui/Img.astro';
+import WhatsAppFloat from '../components/ui/WhatsAppFloat.astro';
+import WhatsAppIcon from '../components/ui/WhatsAppIcon.astro';
 import { getImage } from 'astro:assets';
 import bgHeroRaw from '../assets/images/hero.pocket_resultado.webp';
+import { WA_FALLBACK_MESSAGE, buildWhatsAppUrl } from '../lib/whatsapp-message';
 import '../styles/bio.css';
 
 const bgHero = await getImage({ src: bgHeroRaw });
+const fallbackWaUrl = buildWhatsAppUrl(WA_FALLBACK_MESSAGE);
 ---
 
 <Base
@@ -45,10 +49,11 @@ const bgHero = await getImage({ src: bgHeroRaw });
     <div class="form-body">
       <h2 class="form-title">Solicite um orçamento</h2>
       <p class="form-subtitle">Fale com nossa equipe pelo WhatsApp e receba uma proposta personalizada para o seu evento.</p>
-      <button class="btn-submit" onclick="openWhatsApp()">
+      <a class="btn-submit" href={fallbackWaUrl} target="_blank" rel="noopener noreferrer" data-whatsapp-cta>
+        <WhatsAppIcon size={22} />
         <span class="btn-text">Falar no WhatsApp</span>
         <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      </a>
       <p class="form-note">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Resposta rápida. Sem compromisso.
@@ -71,6 +76,8 @@ const bgHero = await getImage({ src: bgHeroRaw });
     </a>
   </div>
 </footer>
+
+<WhatsAppFloat />
 
 </Base>
 <script>
